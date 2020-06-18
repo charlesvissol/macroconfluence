@@ -17,10 +17,21 @@ Most interesting macros:
   - Company logo or not
   - Slide title is modifiable with background color of each slide title and icon affected to each slide title
 ![Edit slide](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow1.jpg)
+
 ![Slideshow look & feel example](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow2.jpg)
 
 - (Folder language) language: Option to create English, German and French content
+
+![Mark Form](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/language.jpg)
+
+
 - (Folder SVGInclude) SVGInclude: Macro to include SVG with zoom in/out
+
+![Mark Form](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/svginclude.jpg)
+
+
 - (folder mark) Mark macro: simple macro to add multiple color, font, size, background to Confluence content
+
 ![Mark Form](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/Mark1.jpg)
+
 ![Mark result example](https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/Mark2.jpg)
