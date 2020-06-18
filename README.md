@@ -9,11 +9,13 @@ Macros list:
 
 
 Most interesting macros:
-- slideshow: Powerpoint like macro to integrate slideshow in Confluence pages. You can: 
--- Slideshow title
--- title size
--- Slideshow size (fixed or responsive)
--- 
-- language: Option to create English, German and French content
-- SVGInclude: Macro to include SVG with zoom in/out
+- (folder slideshow) slideshow: Powerpoint like macro to integrate slideshow in Confluence pages. You can: 
+  - Slideshow title
+  - title size
+  - Slideshow size (fixed or responsive)
+  - Sidebar for navigation and its background color
+  - Company logo or not
+  - Slide title is modifiable with background color of each slide title and icon affected to each slide title
+- (Folde language) language: Option to create English, German and French content
+- (Folder SVGInclude) SVGInclude: Macro to include SVG with zoom in/out
 - (folder mark) Mark macro: simple macro to add multiple color, font, size, background to Confluence content
