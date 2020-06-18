@@ -16,8 +16,8 @@ Most interesting macros:
   - Sidebar for navigation and its background color
   - Company logo or not
   - Slide title is modifiable with background color of each slide title and icon affected to each slide title
-https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow1.jpg
-[https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow2.jpg]
+(https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow1.jpg)
+(https://github.com/charlesvissol/macroconfluence/blob/master/macroconfluence/slidesshow2.jpg)
 
 - (Folder language) language: Option to create English, German and French content
 - (Folder SVGInclude) SVGInclude: Macro to include SVG with zoom in/out
