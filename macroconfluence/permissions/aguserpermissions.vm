@@ -1,0 +1,87 @@
+## Macro title: User permissions
+## Macro has a body: N
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 14/11/2019
+## Installed by: Charles Vissol
+   
+  
+## @param UserId:title=User identifier|type=username|desc=User identifier|required=true
+## @param SelectedSpace:title=Space name|type=spacekey|desc=Search for space name|required=true
+ 
+
+
+#set($result1 = "")
+#set($result2 = "")
+ 
+#if(!$paramSelectedSpace)
+ 
+ #set($allSpaces = $spaceManager.getAllSpaces())
+
+    #foreach($space in $allSpaces)  
+      #foreach ($permission in $space.getPermissions())
+        #if ($permission.isUserPermission() && $permission.getUserName() == ($paramUserId))
+          #set($result1 = "${result1}<tr>
+            <td class='confluenceTd'>$space.getName()</td>
+			<td class='confluenceTd'>$permission.getType()</td>
+          </tr>")
+        #elseif ($permission.isGroupPermission())
+          #set ( $groupString = $permission.getGroup() )
+            #if ($userAccessor.hasMembership("$groupString", "$paramUserId"))
+              #set($result2 = "${result2}<tr>
+                <td class='confluenceTd'>$space.getName()</td>
+                <td class='confluenceTd'>$groupString</td>
+				<td class='confluenceTd'>$permission.getType()</td>
+              </tr>")      
+            #end
+        #end
+      #end
+    #end
+
+
+
+
+#else  
+
+   #set ($space =  $spaceManager.getSpace($paramSelectedSpace))
+ 
+      #foreach ($permission in $space.getPermissions())
+        #if ($permission.isUserPermission() && $permission.getUserName() == ($paramUserId))
+          #set($result1 = "${result1}<tr>
+            <td class='confluenceTd'>$space.getName()</td>
+			<td class='confluenceTd'>$permission.getType()</td>
+          </tr>")
+        #elseif ($permission.isGroupPermission())
+          #set ( $groupString = $permission.getGroup() )
+            #if ($userAccessor.hasMembership("$groupString", "$paramUserId"))
+              #set($result2 = "${result2}<tr>
+                <td class='confluenceTd'>$space.getName()</td>
+                <td class='confluenceTd'>$groupString</td>
+				<td class='confluenceTd'>$permission.getType()</td>
+              </tr>")      
+            #end
+        #end
+      #end
+#end   
+ 
+ 
+<h2>User permissions for $paramUserId</h2>
+<table class="confluenceTable">
+    <tr>
+      <th class="confluenceTh">Space</th>
+	  <th class="confluenceTh">Access</th>
+    </tr>
+    $result1
+</table>
+ 
+<h2>User Groups Permissions for $paramUserId</h2>
+<table class="confluenceTable">
+    <tr>
+      <th class="confluenceTh">Space</th>
+      <th class="confluenceTh">Group</th>
+	  <th class="confluenceTh">Access</th>
+    </tr>
+    $result2
+</table>

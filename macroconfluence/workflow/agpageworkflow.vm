@@ -1,0 +1,89 @@
+## Macro title: Page Workflow
+## Macro has a body: N
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 13/11/2019
+## Installed by: Charles Vissol
+
+## @noparams
+
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+<div id="pageworkflow::${currentTime}">Page Workflow</div>
+
+<script>
+  
+  xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+				//var frag = document.createDocumentFragment();
+				//var div = document.createElement("div");
+				//div.innerHTML = this.responseText;
+				//var pageActivity = div.getElementById("content");
+				
+                document.getElementById("pageworkflow::${currentTime}").innerHTML = this.responseText;
+				document.getElementById("pageworkflow::${currentTime}").innerHTML = document.getElementById("activityTable").outerHTML;
+				
+				
+				var entries = document.getElementsByClassName("reportEntry");
+				var i;
+				
+				
+				
+				for(i=0;i<entries.length;i++){
+					var stateEmpty = false;
+					var stateActivity = false;
+					
+					var cell = entries[i].children;
+					var j;
+					
+					for(j=0;j < cell.length; j++){
+					
+						if(cell[j].className.includes("statename") ){
+							if(cell[j].innerText == ""){
+								stateEmpty = true;
+								//entries[i].style.display = "none";
+							}
+						}
+				
+					
+						if(cell[j].className.includes("activity-description") ){
+							if(cell[j].innerHTML.includes("cw-state__name")){
+								stateActivity = true;
+								//entries[i].style.display = "block";
+								//entries[i].style.width = "100%";
+							}
+							
+						} 
+					
+					
+					
+					}
+					
+					if(stateEmpty == true){
+						if(stateActivity == false){
+							entries[i].style.display = "none";
+						} 
+					}
+					
+				}
+				
+				
+				//div.innerHTML = "";
+    } else {
+                document.getElementById("pageworkflow::${currentTime}").innerHTML = "Please wait while processing request ...";
+    }
+  };
+
+xhttp.open("GET", "/confluence/pages/viewpageactivity.action?pageId=$content.id", true);
+xhttp.send(); 
+
+</script>
+
+
+
+

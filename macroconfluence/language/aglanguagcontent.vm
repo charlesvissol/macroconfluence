@@ -1,0 +1,31 @@
+## Macro title: Language filter
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 15/06/2020
+## Installed by: Charles Vissol
+
+## @param Contentlanguage:title=Choose language|type=enum|enumValues=English,French,German|required=true|default=English|desc=Choose the language for this content
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+
+#if($paramContentlanguage == "English")
+	<div class="ag-english-content" id="ag-english-content::${currentTime}" style="display:block;">
+	$body
+	</div>
+#end
+
+#if($paramContentlanguage == "French")
+	<div class="ag-french-content" id="ag-french-content::${currentTime}" style="display:none;">
+	$body
+	</div>
+#end
+
+#if($paramContentlanguage == "German")
+	<div class="ag-german-content" id="ag-german-content::${currentTime}" style="display:none;">
+	$body
+	</div>
+#end

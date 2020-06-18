@@ -1,0 +1,54 @@
+## Macro title: Page Workflow
+## Macro has a body: N
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 13/11/2019
+## Installed by: Charles Vissol
+
+## @param FromVersion:title=From Version|type=string|required=true|desc=Select the version from which you want to compare
+## @param ToVersion:title=To Version|type=string|required=true|desc=Select the version to compare
+
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+<h2>Page Diff History</h2>
+<ul>
+<li>From Version: $paramFromVersion</li>
+<li>To Version: $paramToVersion</li>
+</ul>
+<p>Légende:</p>
+<ul>
+	<li><span class="diff-html-added">Ces lignes ont été ajoutées. Ce <span class="diffaddedchars">mot</span> a été ajouté.</span></li>
+	<li><span class="diff-html-removed">Ces lignes ont été supprimées. Ce <span class="diffremovedchars">mot</span> a été supprimé.</span></li>
+	<li><span class="diff-html-changed">La mise en forme a été modifiée.</span></li>
+</ul>
+
+
+<div id="pagediffhistory::${currentTime}">Page Diff History</div>
+
+<script>
+  
+  xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+				//var frag = document.createDocumentFragment();
+				//var div = document.createElement("div");
+				//div.innerHTML = this.responseText;
+				//var pageActivity = div.getElementById("content");
+				
+                document.getElementById("pagediffhistory::${currentTime}").innerHTML = this.responseText;
+				document.getElementById("pagediffhistory::${currentTime}").innerHTML = document.getElementById("page-diffs").outerHTML;
+				
+				//div.innerHTML = "";
+    } else {
+                document.getElementById("pagediffhistory::${currentTime}").innerHTML = "Please wait while processing request ...";
+    }
+  };
+
+xhttp.open("GET", "/confluence/pages/diffpagesbyversion.action?pageId=$content.id&selectedPageVersions=$paramFromVersion&selectedPageVersions=$paramToVersion", true);
+xhttp.send(); 
+///confluence/pages/diffpagesbyversion.action?pageId=218793573&selectedPageVersions=107&selectedPageVersions=106
+</script>

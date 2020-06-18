@@ -1,0 +1,17 @@
+## Macro title: Filter: Section
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 06/09/2019
+## Installed by: Charles Vissol
+
+## This is an example macro
+## @param Name:title=Identifiant de la partie documentaire à filtrer|type=string|required=true|desc=Nom court et sans caractères spéciaux permettant de définir une catégorie de contenu de page à afficher ou cacher
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+<div class="agdtufilterarea" title="$paramName" id="agdtufilterarea::${currentTime}" style="display:block;">
+$body
+</div>

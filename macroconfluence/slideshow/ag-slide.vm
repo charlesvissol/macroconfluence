@@ -1,0 +1,69 @@
+## Macro title: ArianeGroup Slide
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 28/05/2019
+## Installed by: Charles Vissol
+
+## This is an example macro
+## @param SlideTitle:title=Name|type=string|required=true|desc=Title of the Slide
+## @param TheAttachment:title=Image|type=attachment|required=false|desc=Name of the image (60px * 60 px)
+## @param BgColor:title=Background color|type=string|required=false|default=#0069C8|desc=Background color. By default this is the ArianeGroup blue color
+## @param TitleColor:title=Title color|type=string|required=false|default=#fff|desc=Title color. By default it is black
+
+
+
+#set($AttachmentField      = "TheAttachment")          ## for paramTheAttachment
+#set($AttachmentFieldValue = "$!{paramTheAttachment}") ## for paramTheAttachment value
+
+#set($options = [""])
+
+#foreach($Attachment in $attachmentManager.getLatestVersionsOfAttachments($content) )
+	#set($AttachmentName = $Attachment.getFileName() )
+	#if($AttachmentName.matches('(.*.svg\z)|(.*.SVG\z)|(.*.jpg\z)|(.*.JPG\z)|(.*.jpeg\z)|(.*.JPEG\z)|(.*.png\z)|(.*.PNG\z)|(.*.gif\z)|(.*.GIF\z)')) ## if only images are needed; use this
+		#set($dummy = $options.add($AttachmentName) ) ## for all attachments; use this
+	#end         ## if only images are needed; use this
+#end
+
+#if ($req.getRequestURI().contains("tinymce")) ## displayed only in user macro edit mode
+	<script> 
+		var theMacroFeld = window.parent.document.getElementById("macro-param-${AttachmentField}");
+		theMacroFeld.innerHTML = '';
+		#foreach($option in $options)
+			node = document.createElement("option");
+			node.text = "${option}";
+			node.value = "${option}";
+			theMacroFeld.appendChild(node); 
+		#end
+		
+		theMacroFeld.value = "$!{AttachmentFieldValue}";
+	</script> 
+	
+	<ul class="aui-buttons rte-toolbar-group-files"><li id="confluence-insert-files" class="toolbar-item insert-files" data-tooltip="" data-weight="0" original-title=""><a class="toolbar-trigger aui-button" href="#" data-control-id="confluence-insert-files"><span class="icon aui-icon aui-icon-small aui-iconfont-editor-files"></span><span class="trigger-text">Dateien</span></a></li></ul>
+	
+	
+#end
+
+
+
+<!--98365NEXTSLIDE546-->
+
+  <div class="slideHeader agw3-container" style="background-color:${paramBgColor}!important">
+#if($AttachmentFieldValue == "")
+         <p class="agw3-margin"><span class="slide-title" style="color:${paramTitleColor}!important;">${paramSlideTitle}</span></p>
+         </p>
+#else
+         <p class="agw3-margin"><span class="slide-title" style="color:${paramTitleColor}!important;">${paramSlideTitle}</span><img style="float: right;" src="${config.getDomainName()}/download/attachments/${content.getIdAsString()}/${AttachmentFieldValue}" width="60" height="60"/></p>
+         </p>
+#end
+
+  </div>
+  
+  <div class="slideContent agw3-container">
+     $body
+  </div>
+  <div style="height:65px;">
+     
+  </div>

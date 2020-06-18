@@ -1,0 +1,81 @@
+## Macro title: Filter: Header
+## Macro has a body: N
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 06/09/2019
+## Installed by: Charles Vissol
+
+## This is an example macro
+## @noparams 
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+<style>
+.w3-button-filter{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+.w3-block-filter{display:block;width:100%}
+.w3-left-align-filter{text-align:left!important}
+.w3-light-grey-filter{color:#000!important;background-color:#f1f1f1!important}
+.w3-container-filter{padding:0.01em 16px}
+.w3-hide-filter{display:none!important}
+.w3-show-filter{display:block!important}
+.w3-check-filter{width:24px;height:24px;position:relative;top:6px}
+</style>
+
+<script>
+
+//Show/hide the filtered parts of the document
+function showfilter(idcheck,idlabel){
+
+
+var checkBox  = document.getElementById(idcheck);
+var checkLabel = document.getElementById(idlabel);
+var titleSelected = checkLabel.textContent;
+
+		var sectionTags = document.getElementsByClassName("agdtufilterarea");
+		for (j = 0; j < sectionTags.length; j++) {
+			var titleTag = sectionTags[j].getAttribute("title");
+			var idTag = sectionTags[j].getAttribute("id");
+			if(titleTag == titleSelected){
+				if(checkBox.checked == true)
+					document.getElementById(idTag).style.display = "block";
+				else
+					document.getElementById(idTag).style.display = "none";
+			}
+		}
+		
+}
+</script>
+
+<script>
+function openfilter(id) {
+	  var x = document.getElementById(id);
+	  if (x.className.indexOf("w3-show-filter") == -1) {
+	    x.className += " w3-show-filter";
+	    
+	    var text = "";
+	    var sectionTags = document.getElementsByClassName("agdtufilterarea");
+
+		
+		
+		
+	    for (i = 0; i < sectionTags.length; i++) {
+	    	var uri =sectionTags[i].getAttribute("title");
+	    	if(text.search(sectionTags[i].getAttribute("title"))==-1)	
+	    	   text += "<input id=\"filtercheck::${currentTime}"+i+"\" class=\"w3-check-filter\" type=\"checkbox\" onclick=\"showfilter('filtercheck::${currentTime}"+i+"','filterlabel::${currentTime}"+i+"')\" checked><label id=\"filterlabel::${currentTime}"+i+"\">" + uri + "</label> <br>";
+	    	}
+	    	
+	    document.getElementById(id).innerHTML = text;    
+	    
+	    
+	    
+	  } else { 
+	    x.className = x.className.replace(" w3-show-filter", "");
+	  }
+	}
+</script>
+
+   <button class="w3-button-filter w3-block-filter w3-left-align-filter w3-light-grey-filter" onclick="openfilter('filter::${currentTime}')"><img width="30" height="30" src="https://jwsrec-arianegroup.fr.space.corp/images/user-macro-icons/filter.svg"> Filtre </button> 
+   <div class="w3-container-filter w3-hide-filter" id="filter::${currentTime}"> 
+   </div> 

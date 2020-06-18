@@ -1,0 +1,528 @@
+## Macro title: Slideshow
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: C.Vissol
+## Date created: 23/05/2019
+## Installed by: C.Vissol
+
+## This is an example macro
+## @param Title:title=Slideshow title|type=string|required=true|desc=Slideshow title
+## @param TitleSize:title=Slideshow title Size|type=string|required=true|default=60|desc=Modify the Slideshow title Size (in px)
+## @param MenuSize:title=Menu font size|type=string|required=true|default=14|desc=Modify the Slideshow Navigation menu font size (in px)
+## @param SidebarWidth:title=Sidebar Width|type=int|required=true|default=250|desc=Modify the Slideshow Navigation menu width (in px)
+## @param SidebarHeight:title=Sidebar Height|type=int|required=true|default=400|desc=Modify the Slideshow Navigation menu height (in px)
+## @param SidebarBgColor:title=Sidebar Background color|type=enum|enumValues=Black,Light blue,Blue|default=Black|required=true|desc=Modify the background color of Sidebar
+## @param ShowAgLogo:title=Show ArianeGroup Logo|type=boolean|required=true|desc=Choose if you show ArianeGroup Logo
+## @param SlideW:title=Slides width|type=int|required=false|desc=Slides width in pixels (default 100%)
+## @param SlideH:title=Slides height|type=int|required=false|desc=Slides height in pixels (default 100%)
+
+<div>
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+<style>
+.agw3-light-grey,.agw3-hover-light-grey:hover,.agw3-light-gray,.agw3-hover-light-gray:hover{color:#000!important;background-color:#f1f1f1!important}
+.agw3-red,.agw3-hover-red:hover{color:#fff!important;background-color:#f44336!important}
+.agw3-black,.agw3-hover-black:hover{color:#fff!important;background-color:#000!important}
+.slide-title{font-family: 'Segoe UI',Arial,Verdana,sans-serif;font-size:36px}
+.agw3-container,.agw3-panel{padding:0.01em 16px}.agw3-panel{margin-top:16px;margin-bottom:16px}
+.agw3-container:after,.agw3-container:before,.agw3-panel:after,.agw3-panel:before,.agw3-row:after,.agw3-row:before,.agw3-row-padding:after,.agw3-row-padding:before,
+.agw3-card-4,.agw3-hover-shadow:hover{box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)}
+.agw3-container:after,.agw3-container:before,.agw3-panel:after,.agw3-panel:before,.agw3-row:after,.agw3-row:before,.agw3-row-padding:after,.agw3-row-padding:before,
+.agw3-margin{margin:16px!important}.agw3-margin-top{margin-top:16px!important}.agw3-margin-bottom{margin-bottom:16px!important}
+
+
+.sidenav${currentTime} {
+  float: left; 
+  /*height: 100%;*/
+  width: 0;
+  position: inherit;
+  z-index: 5;
+  top: 0;
+  left: 0;
+#if($paramSidebarBgColor == "Black")
+  background-color: #1D1D1B;
+#end
+#if($paramSidebarBgColor == "Light blue")
+  background-color: #0069C8;
+#end
+#if($paramSidebarBgColor == "Blue")
+  background-color: #2C5697;
+#end
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav${currentTime} .closebtn${currentTime} {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.sidenav${currentTime} a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  /*color: #818181;*/
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav${currentTime} a:hover {
+  color: #f1f1f1;
+}
+
+
+/* Tooltip container */
+.tooltip${currentTime} {
+	text-decoration:none;
+	padding:8px 16px;
+	cursor:pointer;
+	position: relative;
+	display: inline-block;
+	border: 2px solid white;
+}
+
+/* Tooltip text */
+.tooltip${currentTime} .tooltiptext${currentTime} {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip${currentTime} .tooltiptext${currentTime}::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip${currentTime}:hover .tooltiptext${currentTime} {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
+#if(!$paramSlideW && !$paramSlideH)
+            .slideshow-container$currentTime {position: relative;margin: auto;}
+			.slideshow-footer-container$currentTime {position: relative; height:65px;margin: auto;}
+			.slideshow-frame$currentTime {position: relative; margin: auto;}
+            .activeDot${currentTime} {position: relative;margin: auto;}
+#end
+#if(!$paramSlideH && $paramSlideW)
+            .slideshow-container$currentTime {width:${paramSlideW}px; position: relative;margin: auto;}
+			.slideshow-footer-container$currentTime {width:${paramSlideW}px; height:65px; position: relative;margin: auto;}
+			.slideshow-frame$currentTime {width:${paramSlideW}px; position: relative;margin: auto;}
+            .activeDot${currentTime} {width:${paramSlideW}px;position: relative;margin: auto;}
+#end
+#if(!$paramSlideW && $paramSlideH)
+            .slideshow-container$currentTime {height:${paramSlideH}px;position: relative;margin: auto;}
+			.slideshow-footer-container$currentTime {height:65px;position: relative;margin: auto;}
+			.slideshow-frame$currentTime {position: relative;margin: auto;}
+            .activeDot${currentTime} {position: relative;margin: auto;}
+#end
+#if($paramSlideW && $paramSlideH)
+            .slideshow-container$currentTime {width:${paramSlideW}px;height:${paramSlideH}px;position: relative;margin: auto;}
+			.slideshow-footer-container$currentTime {width:${paramSlideW}px;height:65px;position: relative;margin: auto;}
+			.slideshow-frame$currentTime {width:${paramSlideW}px; position: relative;margin: auto;}
+            .activeDot${currentTime} {width:${paramSlideW}px;position: relative;margin: auto;}
+#end
+
+.displayAll${currentTime}:hover {
+  opacity: 0.5;
+}
+
+.displayAll${currentTime} {
+  position:absolute;
+  right:0px;
+  height:20px;
+  width:120px;
+  text-align:center;
+  cursor: pointer;
+  color:#FFFFFF;
+  margin: 0 2px;
+  background-color: #717171;
+  border-radius: 5%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+
+
+
+.slideHeader {
+  padding: 8px 12px;
+  position: relative;
+  top: 0px;
+}
+
+.slideContent {
+	position:relative;
+        margin: 15px 15px 15px 15px;
+}
+
+.$currentTime {
+    display:none;
+}
+
+
+.slideTitle{
+	position:relative;
+	text-align:center;
+        vertical-align: middle;
+}
+/*
+.dot${currentTime} {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  color:#FFFFFF;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}*/
+/*
+.active, .dot${currentTime}:hover {
+  background-color: #717171;
+}
+*/
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+</style>
+
+
+
+
+
+
+ 
+#set ($bodyPresentation = $body)
+
+
+
+#set ( $lines = $bodyPresentation.split("<!--98365NEXTSLIDE546-->") )
+
+
+<div class="slideTitle">
+	<span onclick="openNav${currentTime}()" class="agw3-light-grey" style="position:inherit;left:0px; cursor: pointer;font-size:${paramTitleSize}px;" title="Table of Content">&#9776;</span>
+    <span style="font-size:${paramTitleSize}px;">&nbsp;$paramTitle&nbsp;</span>
+</div>
+<br/>
+
+<div class="activeDot${currentTime}" style="text-align:center;" id="activeDot::${currentTime}">
+
+</div>
+<br/>
+
+<div class="agw3-card-4 slideshow-frame${currentTime}">
+
+
+#if($paramSlideH)
+<div class="slideshow-container${currentTime}" id="slideshow-container$currentTime" style="position:relative;z-index:4;overflow:hidden;">
+#else
+<div class="slideshow-container${currentTime}" id="slideshow-container$currentTime" style="position:relative;z-index:4;">
+#end
+	<div id="mySidenav${currentTime}" class="sidenav${currentTime} agw3-card-4">
+		<a href="javascript:void(0)" class="closebtn${currentTime}" style="color: #f1f1f1;" onclick="closeNav${currentTime}()">&times;</a>
+		<ul id="activeToc::${currentTime}" class="activeToc::${currentTime}">
+		
+		
+		</ul>
+	</div>
+	
+
+	<div class="main${currentTime}" id="main${currentTime}">
+
+#set ($index = -1)
+
+#foreach ( $line in $lines )
+   #set($index = $index + 1) 
+
+   #if($index == 1) 
+		
+		  <div class="${currentTime} slide::${currentTime} fade" id="slide::${currentTime}::${index}" style="display:block;">
+			  ${line}
+		  </div>   
+  
+   #end
+
+   #if($index > 1) 
+		  <div class="${currentTime} slide::${currentTime} fade" id="slide::${currentTime}::${index}" style="display:none;">
+			  ${line}
+		  </div>
+
+   #end
+#end
+
+
+</div>
+
+</div>
+
+
+#if($paramShowAgLogo == true)
+<div class="slideshow-footer-container${currentTime}" id="slideshow-footer-container$currentTime" style="position:relative;z-index:6;">
+
+
+
+	<!-- Footer -->
+
+
+
+	<div class="agw3-container" style="position:relative;top:0px;left:0px;">
+
+	  <p>
+	  <img src="data:image/png;base64,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"/>
+
+	</p>
+	</div>
+
+</div>
+#end
+</div>
+
+
+
+
+
+<br/>
+
+
+<script>
+
+
+var slides = document.getElementsByClassName("slide::${currentTime}");
+
+var i;
+var k;
+var dots = "";
+var tocs = "";
+
+//Create buttons
+for (i = 0; i < slides.length; i++) {
+	k = i+1;
+
+	if(i == 0){
+		tocs = "<li class=\"activeItem::${currentTime}\" style=\"cursor: pointer;color: #FFFFFF;font-size: ${paramMenuSize}px;\" onclick=\"display${currentTime}('dot::" + slides[i].id + "','" + slides[i].id + "')\"><span class=\"agw3-light-grey\">&nbsp;" + k + "&nbsp;</span> " + slides[i].getElementsByClassName("slide-title")[0].textContent + "</li>"; 
+		dots = "<div class=\"tooltip${currentTime} agw3-red dot::slide::${currentTime}\" id=\"dot::" + slides[i].id + "\" onclick=\"display${currentTime}('dot::" + slides[i].id + "','" + slides[i].id + "')\">" + k + "<span onclick=\"noaction${currentTime}()\" class=\"tooltiptext${currentTime}\">" + slides[i].getElementsByClassName("slide-title")[0].textContent + "</span></div>";
+		//slides[i].style.display = "block";
+	} else {
+		tocs = tocs + "<li class=\"activeItem::${currentTime}\" style=\"cursor: pointer;color: #FFFFFF;font-size: ${paramMenuSize}px;\" onclick=\"display${currentTime}('dot::" + slides[i].id + "','" + slides[i].id + "')\"><span class=\"agw3-light-grey\">&nbsp;" + k + "&nbsp;</span> " + slides[i].getElementsByClassName("slide-title")[0].textContent + "</li>";
+		dots = dots + " &nbsp; " + "<div class=\"tooltip${currentTime} agw3-light-grey dot::slide::${currentTime}\" id=\"dot::" + slides[i].id + "\" onclick=\"display${currentTime}('dot::" + slides[i].id + "','" + slides[i].id + "')\">" + k + "<span onclick=\"noaction${currentTime}()\" class=\"tooltiptext${currentTime}\">" + slides[i].getElementsByClassName("slide-title")[0].textContent + "</span></div>";
+		//slides[i].style.display = "none";
+	}
+	//alert(slides[i].getElementsByClassName("slideContent")[0].innerHTML);
+	
+
+}
+
+tocs = tocs + "<br>";
+
+
+document.getElementById("activeDot::${currentTime}").innerHTML = dots;
+document.getElementById("activeToc::${currentTime}").innerHTML = tocs;
+
+//Display slideshow dimensions
+#if(!$paramSlideW && !$paramSlideH)
+   document.getElementById("slideshow-container${currentTime}").style.width = "100%";
+#end
+#if(!$paramSlideH && $paramSlideW)
+   document.getElementById("slideshow-container${currentTime}").style.width = "${paramSlideW}px";
+#end
+#if(!$paramSlideW && $paramSlideH)
+   document.getElementById("slideshow-container${currentTime}").style.width = "100%";
+#end
+#if($paramSlideW && $paramSlideH)
+   document.getElementById("slideshow-container${currentTime}").style.width = "${paramSlideW}px";
+#end
+
+
+function openNav${currentTime}() {
+  document.getElementById("mySidenav${currentTime}").style.display = "block";
+  document.getElementById("mySidenav${currentTime}").style.width = "${paramSidebarWidth}px";
+#if(${paramSlideH})
+    var dimSidebar = ${paramSlideH} - 63;//Height of AG logo
+    document.getElementById("mySidenav${currentTime}").style.height = dimSidebar + "px";
+#else
+    document.getElementById("mySidenav${currentTime}").style.height = ${paramSidebarHeight} + "px";  
+#end
+
+  //document.getElementById("main${currentTime}").style.height;
+  //alert(document.getElementById("mySidenav${currentTime}").style.height);
+  document.getElementById("main${currentTime}").style.marginLeft = "${paramSidebarWidth}px";
+}
+
+function closeNav${currentTime}() {
+  document.getElementById("mySidenav${currentTime}").style.display = "none";
+  document.getElementById("mySidenav${currentTime}").style.width = "0";
+  document.getElementById("main${currentTime}").style.marginLeft= "0";
+}
+
+
+
+function noaction${currentTime}(){}
+
+//Display target slide when clicking on source button
+function display${currentTime}(idSource,id){
+		
+		
+		var slides = document.getElementsByClassName("slide::${currentTime}");
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		
+		var allDots = document.getElementsByClassName("dot::slide::${currentTime}");
+		for (i = 0; i < allDots.length; i++) {
+			allDots[i].className  = "tooltip${currentTime} agw3-light-grey dot::slide::${currentTime}";
+		}
+		document.getElementById(id).style.display = "block";
+		//alert(event.target.className);
+		document.getElementById(idSource).className = "tooltip${currentTime} agw3-red dot::slide::${currentTime}";
+
+}
+
+
+</script>
+
+</div>
