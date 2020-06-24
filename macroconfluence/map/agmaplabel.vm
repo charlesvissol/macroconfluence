@@ -1,0 +1,262 @@
+## Macro title: Advanced Map Label
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 24/06/2020
+## Installed by: Charles Vissol
+
+
+## @param Top:title=Top position (px)|type=string|required=true|default=100|desc=Set the Top position of the label in pixel
+## @param Left:title=Left position (px)|type=string|required=true|default=100|desc=Set the Left position of the label in pixel
+## @param Opacity:title=Opacity (%)|type=enum|enumValues=100%,90%,80%,70%,60%,50%,40%,30%,20%,10%|default=100%|desc=Choose the opacity (%)
+## @param BgColor:title=Background Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Light Gray|desc=Choose background color
+## @param FontColor:title=Font Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Black|desc=Choose font color
+## @param Width:title=Width of the label (px)|type=string|required=true|default=200|desc=Set the Width dimension of the label in pixel
+## @param Layer:title=Position of the label layer (integer)|type=string|required=true|default=200|desc=Define the value of the layer position (z-index). Default is 200.
+## @param IsShadow:title=Display shadow|type=boolean|required=true|default=false|desc=Select if you want to see a shadow
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+
+#if($paramOpacity == "100%")
+	#set($opacity = "1.0")
+#end
+#if($paramOpacity == "90%")
+	#set($opacity = "0.9")
+#end
+#if($paramOpacity == "80%")
+	#set($opacity = "0.8")
+#end
+#if($paramOpacity == "70%")
+	#set($opacity = "0.7")
+#end
+#if($paramOpacity == "60%")
+	#set($opacity = "0.6")
+#end
+#if($paramOpacity == "50%")
+	#set($opacity = "0.5")
+#end
+#if($paramOpacity == "40%")
+	#set($opacity = "0.4")
+#end
+#if($paramOpacity == "30%")
+	#set($opacity = "0.3")
+#end
+#if($paramOpacity == "20%")
+	#set($opacity = "0.2")
+#end
+#if($paramOpacity == "10%")
+	#set($opacity = "0.1")
+#end
+
+
+
+
+
+#if($paramBgColor == "Black")
+	#set($backgroundColor = "#000000")
+#end
+#if($paramBgColor == "White")
+	#set($backgroundColor = "#ffffff")
+#end
+#if($paramBgColor == "Red")
+	#set($backgroundColor = "#f44336")
+#end
+#if($paramBgColor == "Pink")
+	#set($backgroundColor = "#e91e63")
+#end
+#if($paramBgColor == "Purple")
+	#set($backgroundColor = "#9c27b0")
+#end
+#if($paramBgColor == "Deep purple")
+	#set($backgroundColor = "#673ab7")
+#end
+#if($paramBgColor == "Indigo")
+	#set($backgroundColor = "#3f51b5")
+#end
+#if($paramBgColor == "Blue")
+	#set($backgroundColor = "#2196F3")
+#end
+#if($paramBgColor == "Blue")
+	#set($backgroundColor = "#2196F3")
+#end
+#if($paramBgColor == "Light Blue")
+	#set($backgroundColor = "#87CEEB")
+#end
+#if($paramBgColor == "Cyan")
+	#set($backgroundColor = "#00bcd4")
+#end
+#if($paramBgColor == "Aqua")
+	#set($backgroundColor = "#00ffff")
+#end
+#if($paramBgColor == "Teal")
+	#set($backgroundColor = "#009688")
+#end
+#if($paramBgColor == "Green")
+	#set($backgroundColor = "#4CAF50")
+#end
+#if($paramBgColor == "Light Green")
+	#set($backgroundColor = "#8bc34a")
+#end
+#if($paramBgColor == "Lime")
+	#set($backgroundColor = "#cddc39")
+#end
+#if($paramBgColor == "Sand")
+	#set($backgroundColor = "#fdf5e6")
+#end
+#if($paramBgColor == "Khaki")
+	#set($backgroundColor = "#f0e68c")
+#end
+#if($paramBgColor == "Yellow")
+	#set($backgroundColor = "#ffeb3b")
+#end
+#if($paramBgColor == "Amber")
+	#set($backgroundColor = "#ffc107")
+#end
+#if($paramBgColor == "Orange")
+	#set($backgroundColor = "#ff9800")
+#end
+#if($paramBgColor == "Deep Orange")
+	#set($backgroundColor = "#ff5722")
+#end
+#if($paramBgColor == "Blue Gray")
+	#set($backgroundColor = "#607d8b")
+#end
+#if($paramBgColor == "Brown")
+	#set($backgroundColor = "#795548")
+#end
+#if($paramBgColor == "Light Gray")
+	#set($backgroundColor = "#f1f1f1")
+#end
+#if($paramBgColor == "Gray")
+	#set($backgroundColor = "#9e9e9e")
+#end
+#if($paramBgColor == "Dark Gray")
+	#set($backgroundColor = "#616161")
+#end
+#if($paramBgColor == "Pale Red")
+	#set($backgroundColor = "#ffdddd")
+#end
+#if($paramBgColor == "Pale Yellow")
+	#set($backgroundColor = "#ffffcc")
+#end
+#if($paramBgColor == "Pale Green")
+	#set($backgroundColor = "#ddffdd")
+#end
+#if($paramBgColor == "Pale Blue")
+	#set($backgroundColor = "#ddffff")
+#end
+
+#if($paramFontColor == "Black")
+	#set($fontColor = "#000000")
+#end
+#if($paramFontColor == "White")
+	#set($fontColor = "#ffffff")
+#end
+#if($paramFontColor == "Red")
+	#set($fontColor = "#f44336")
+#end
+#if($paramFontColor == "Pink")
+	#set($fontColor = "#e91e63")
+#end
+#if($paramFontColor == "Purple")
+	#set($fontColor = "#9c27b0")
+#end
+#if($paramFontColor == "Deep purple")
+	#set($fontColor = "#673ab7")
+#end
+#if($paramFontColor == "Indigo")
+	#set($fontColor = "#3f51b5")
+#end
+#if($paramFontColor == "Blue")
+	#set($fontColor = "#2196F3")
+#end
+#if($paramFontColor == "Blue")
+	#set($fontColor = "#2196F3")
+#end
+#if($paramFontColor == "Light Blue")
+	#set($fontColor = "#87CEEB")
+#end
+#if($paramFontColor == "Cyan")
+	#set($fontColor = "#00bcd4")
+#end
+#if($paramFontColor == "Aqua")
+	#set($fontColor = "#00ffff")
+#end
+#if($paramFontColor == "Teal")
+	#set($fontColor = "#009688")
+#end
+#if($paramFontColor == "Green")
+	#set($fontColor = "#4CAF50")
+#end
+#if($paramFontColor == "Light Green")
+	#set($fontColor = "#8bc34a")
+#end
+#if($paramFontColor == "Lime")
+	#set($fontColor = "#cddc39")
+#end
+#if($paramFontColor == "Sand")
+	#set($fontColor = "#fdf5e6")
+#end
+#if($paramFontColor == "Khaki")
+	#set($fontColor = "#f0e68c")
+#end
+#if($paramFontColor == "Yellow")
+	#set($fontColor = "#ffeb3b")
+#end
+#if($paramFontColor == "Amber")
+	#set($fontColor = "#ffc107")
+#end
+#if($paramFontColor == "Orange")
+	#set($fontColor = "#ff9800")
+#end
+#if($paramFontColor == "Deep Orange")
+	#set($fontColor = "#ff5722")
+#end
+#if($paramFontColor == "Blue Gray")
+	#set($fontColor = "#607d8b")
+#end
+#if($paramFontColor == "Brown")
+	#set($fontColor = "#795548")
+#end
+#if($paramFontColor == "Light Gray")
+	#set($fontColor = "#f1f1f1")
+#end
+#if($paramFontColor == "Gray")
+	#set($fontColor = "#9e9e9e")
+#end
+#if($paramFontColor == "Dark Gray")
+	#set($fontColor = "#616161")
+#end
+#if($paramFontColor == "Pale Red")
+	#set($fontColor = "#ffdddd")
+#end
+#if($paramFontColor == "Pale Yellow")
+	#set($fontColor = "#ffffcc")
+#end
+#if($paramFontColor == "Pale Green")
+	#set($fontColor = "#ddffdd")
+#end
+#if($paramFontColor == "Pale Blue")
+	#set($fontColor = "#ddffff")
+#end
+
+
+
+#if($paramIsShadow == true)
+<div 
+	class="agmaplabel" 
+	id="agmaplabel::${currentTime}" 
+	style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);position:absolute;color:${fontColor};z-index:${paramLayer};left:${paramLeft}px;top:${paramTop}px;width:${paramWidth}px;opacity:${opacity};display:block;background-color:${backgroundColor};">
+	$body
+</div>
+#else
+<div 
+	class="agmaplabel" 
+	id="agmaplabel::${currentTime}" 
+	style="position:absolute;color:${fontColor};z-index:${paramLayer};left:${paramLeft}px;top:${paramTop}px;width:${paramWidth}px;opacity:${opacity};display:block;background-color:${backgroundColor};">
+	$body
+</div>
+#end

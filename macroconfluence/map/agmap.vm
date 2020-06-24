@@ -1,0 +1,118 @@
+## Macro title: Advanced Map
+## Macro has a body: Y
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Charles Vissol
+## Date created: 24/06/2020
+## Installed by: Charles Vissol
+
+## @param BgColor:title=Background Color|type=enum|enumValues=None,Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=None|desc=Choose background color
+
+
+#set($currentTime = $action.dateFormatter.calendar.timeInMillis)
+
+#if($paramBgColor == "Black")
+	#set($backgroundColor = "#000000")
+#end
+#if($paramBgColor == "White")
+	#set($backgroundColor = "#ffffff")
+#end
+#if($paramBgColor == "Red")
+	#set($backgroundColor = "#f44336")
+#end
+#if($paramBgColor == "Pink")
+	#set($backgroundColor = "#e91e63")
+#end
+#if($paramBgColor == "Purple")
+	#set($backgroundColor = "#9c27b0")
+#end
+#if($paramBgColor == "Deep purple")
+	#set($backgroundColor = "#673ab7")
+#end
+#if($paramBgColor == "Indigo")
+	#set($backgroundColor = "#3f51b5")
+#end
+#if($paramBgColor == "Blue")
+	#set($backgroundColor = "#2196F3")
+#end
+#if($paramBgColor == "Blue")
+	#set($backgroundColor = "#2196F3")
+#end
+#if($paramBgColor == "Light Blue")
+	#set($backgroundColor = "#87CEEB")
+#end
+#if($paramBgColor == "Cyan")
+	#set($backgroundColor = "#00bcd4")
+#end
+#if($paramBgColor == "Aqua")
+	#set($backgroundColor = "#00ffff")
+#end
+#if($paramBgColor == "Teal")
+	#set($backgroundColor = "#009688")
+#end
+#if($paramBgColor == "Green")
+	#set($backgroundColor = "#4CAF50")
+#end
+#if($paramBgColor == "Light Green")
+	#set($backgroundColor = "#8bc34a")
+#end
+#if($paramBgColor == "Lime")
+	#set($backgroundColor = "#cddc39")
+#end
+#if($paramBgColor == "Sand")
+	#set($backgroundColor = "#fdf5e6")
+#end
+#if($paramBgColor == "Khaki")
+	#set($backgroundColor = "#f0e68c")
+#end
+#if($paramBgColor == "Yellow")
+	#set($backgroundColor = "#ffeb3b")
+#end
+#if($paramBgColor == "Amber")
+	#set($backgroundColor = "#ffc107")
+#end
+#if($paramBgColor == "Orange")
+	#set($backgroundColor = "#ff9800")
+#end
+#if($paramBgColor == "Deep Orange")
+	#set($backgroundColor = "#ff5722")
+#end
+#if($paramBgColor == "Blue Gray")
+	#set($backgroundColor = "#607d8b")
+#end
+#if($paramBgColor == "Brown")
+	#set($backgroundColor = "#795548")
+#end
+#if($paramBgColor == "Light Gray")
+	#set($backgroundColor = "#f1f1f1")
+#end
+#if($paramBgColor == "Gray")
+	#set($backgroundColor = "#9e9e9e")
+#end
+#if($paramBgColor == "Dark Gray")
+	#set($backgroundColor = "#616161")
+#end
+#if($paramBgColor == "Pale Red")
+	#set($backgroundColor = "#ffdddd")
+#end
+#if($paramBgColor == "Pale Yellow")
+	#set($backgroundColor = "#ffffcc")
+#end
+#if($paramBgColor == "Pale Green")
+	#set($backgroundColor = "#ddffdd")
+#end
+#if($paramBgColor == "Pale Blue")
+	#set($backgroundColor = "#ddffff")
+#end
+
+
+#if($paramBgColor == "None")
+	<div class="agmap" id="agmap::${currentTime}" style="position: relative;">
+	$body
+	</div>
+#else
+	<div class="agmap" id="agmap::${currentTime}" style="background-color:${backgroundColor};position: relative;">
+	$body
+	</div>
+#end
