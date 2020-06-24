@@ -15,7 +15,7 @@
 ## @param BgColor:title=Background Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Light Gray|desc=Choose background color
 ## @param FontColor:title=Font Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Black|desc=Choose font color
 ## @param Width:title=Width of the label (px)|type=string|required=true|default=200|desc=Set the Width dimension of the label in pixel
-## @param Layer:title=Position of the label layer (integer)|type=string|required=true|default=200|desc=Define the value of the layer position (z-index). Default is 200.
+## @param Layer:title=Position of the label layer (integer)|type=string|required=true|default=50|desc=Define the value of the layer position (z-index). Default is 50.
 ## @param IsShadow:title=Display shadow|type=boolean|required=true|default=false|desc=Select if you want to see a shadow
 
 #set($currentTime = $action.dateFormatter.calendar.timeInMillis)
