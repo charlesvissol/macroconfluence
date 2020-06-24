@@ -7,6 +7,7 @@
 ## Date created: 24/06/2020
 ## Installed by: Charles Vissol
 
+
 ## @param BgColor:title=Background Color|type=enum|enumValues=None,Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=None|desc=Choose background color
 
 

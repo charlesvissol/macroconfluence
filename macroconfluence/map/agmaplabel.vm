@@ -8,6 +8,7 @@
 ## Installed by: Charles Vissol
 
 
+
 ## @param Top:title=Top position (px)|type=string|required=true|default=100|desc=Set the Top position of the label in pixel
 ## @param Left:title=Left position (px)|type=string|required=true|default=100|desc=Set the Left position of the label in pixel
 ## @param Opacity:title=Opacity (%)|type=enum|enumValues=100%,90%,80%,70%,60%,50%,40%,30%,20%,10%|default=100%|desc=Choose the opacity (%)
