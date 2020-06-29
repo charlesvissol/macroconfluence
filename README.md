@@ -9,13 +9,13 @@ Install Users Macros by Administration panel (copy/paste code) Macros list:
 Most interesting macros:
 
 - (folder slideshow) slideshow: Powerpoint like macro to integrate slideshow in Confluence pages. You can:
- - Slideshow title
- - title size
- - Slideshow size (fixed or responsive)
- - Sidebar for navigation and its background color
- - Company logo or not
- - Slide title is modifiable with background color of each slide title and icon affected to each slide title Edit slide
- - Slideshow look & feel example
+  - Slideshow title
+  - title size
+  - Slideshow size (fixed or responsive)
+  - Sidebar for navigation and its background color
+  - Company logo or not
+  - Slide title is modifiable with background color of each slide title and icon affected to each slide title Edit slide
+  - Slideshow look & feel example
 
 - (Folder language) language: Option to create English, German and French content
 
