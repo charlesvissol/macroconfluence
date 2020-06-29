@@ -8,146 +8,150 @@
 ## Installed by: Charles Vissol
 
 
-
 ## @param Top:title=Top position (px)|type=string|required=true|default=100|desc=Set the Top position of the label in pixel
 ## @param Left:title=Left position (px)|type=string|required=true|default=100|desc=Set the Left position of the label in pixel
-## @param Opacity:title=Opacity (%)|type=enum|enumValues=100%,90%,80%,70%,60%,50%,40%,30%,20%,10%|default=100%|desc=Choose the opacity (%)
-## @param BgColor:title=Background Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Light Gray|desc=Choose background color
+## @param Opacity:title=Opacity (%)|type=enum|enumValues=100%,90%,80%,70%,60%,50%,40%,30%,20%,10%,No Opacity|default=100%|desc=Choose the opacity (%)
+## @param BgColor:title=Background Color|type=enum|enumValues=None,Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=None|desc=Choose background color
 ## @param FontColor:title=Font Color|type=enum|enumValues=Black,White,Red,Pink,Purple,Deep purple,Indigo,Blue,Light Blue,Cyan,Aqua,Teal,Green,Light Green,Lime,Sand,Khaki,Yellow,Amber,Orange,Deep Orange,Blue Gray,Brown,Light Gray,Gray,Dark Gray,Pale Red,Pale Yellow,Pale Green,Pale Blue|default=Black|desc=Choose font color
-## @param Width:title=Width of the label (px)|type=string|required=true|default=200|desc=Set the Width dimension of the label in pixel
-## @param Layer:title=Position of the label layer (integer)|type=string|required=true|default=50|desc=Define the value of the layer position (z-index). Default is 50.
+## @param Width:title=Width of the label (px)|type=string|required=false|desc=Set the Width dimension of the label in pixel
+## @param Layer:title=Position of the label layer (integer)|type=string|required=true|default=200|desc=Define the value of the layer position (z-index). Default is 200.
 ## @param IsShadow:title=Display shadow|type=boolean|required=true|default=false|desc=Select if you want to see a shadow
 
 #set($currentTime = $action.dateFormatter.calendar.timeInMillis)
 
 
 #if($paramOpacity == "100%")
-	#set($opacity = "1.0")
+	#set($opacity = "opacity:1.0")
 #end
 #if($paramOpacity == "90%")
-	#set($opacity = "0.9")
+	#set($opacity = "opacity:0.9")
 #end
 #if($paramOpacity == "80%")
-	#set($opacity = "0.8")
+	#set($opacity = "opacity:0.8")
 #end
 #if($paramOpacity == "70%")
-	#set($opacity = "0.7")
+	#set($opacity = "opacity:0.7")
 #end
 #if($paramOpacity == "60%")
-	#set($opacity = "0.6")
+	#set($opacity = "opacity:0.6")
 #end
 #if($paramOpacity == "50%")
-	#set($opacity = "0.5")
+	#set($opacity = "opacity:0.5")
 #end
 #if($paramOpacity == "40%")
-	#set($opacity = "0.4")
+	#set($opacity = "opacity:0.4")
 #end
 #if($paramOpacity == "30%")
-	#set($opacity = "0.3")
+	#set($opacity = "opacity:0.3")
 #end
 #if($paramOpacity == "20%")
-	#set($opacity = "0.2")
+	#set($opacity = "opacity:0.2")
 #end
 #if($paramOpacity == "10%")
-	#set($opacity = "0.1")
+	#set($opacity = "opacity:0.1")
+#end
+#if($paramOpacity == "No Opacity")
+	#set($opacity = "")
 #end
 
 
 
 
-
+#if($paramBgColor == "None")
+	#set($backgroundColor = "")
+#end
 #if($paramBgColor == "Black")
-	#set($backgroundColor = "#000000")
+	#set($backgroundColor = "background-color:#000000")
 #end
 #if($paramBgColor == "White")
-	#set($backgroundColor = "#ffffff")
+	#set($backgroundColor = "background-color:#ffffff")
 #end
 #if($paramBgColor == "Red")
-	#set($backgroundColor = "#f44336")
+	#set($backgroundColor = "background-color:#f44336")
 #end
 #if($paramBgColor == "Pink")
-	#set($backgroundColor = "#e91e63")
+	#set($backgroundColor = "background-color:#e91e63")
 #end
 #if($paramBgColor == "Purple")
-	#set($backgroundColor = "#9c27b0")
+	#set($backgroundColor = "background-color:#9c27b0")
 #end
 #if($paramBgColor == "Deep purple")
-	#set($backgroundColor = "#673ab7")
+	#set($backgroundColor = "background-color:#673ab7")
 #end
 #if($paramBgColor == "Indigo")
-	#set($backgroundColor = "#3f51b5")
+	#set($backgroundColor = "background-color:#3f51b5")
 #end
 #if($paramBgColor == "Blue")
-	#set($backgroundColor = "#2196F3")
+	#set($backgroundColor = "background-color:#2196F3")
 #end
 #if($paramBgColor == "Blue")
-	#set($backgroundColor = "#2196F3")
+	#set($backgroundColor = "background-color:#2196F3")
 #end
 #if($paramBgColor == "Light Blue")
-	#set($backgroundColor = "#87CEEB")
+	#set($backgroundColor = "background-color:#87CEEB")
 #end
 #if($paramBgColor == "Cyan")
-	#set($backgroundColor = "#00bcd4")
+	#set($backgroundColor = "background-color:#00bcd4")
 #end
 #if($paramBgColor == "Aqua")
-	#set($backgroundColor = "#00ffff")
+	#set($backgroundColor = "background-color:#00ffff")
 #end
 #if($paramBgColor == "Teal")
-	#set($backgroundColor = "#009688")
+	#set($backgroundColor = "background-color:#009688")
 #end
 #if($paramBgColor == "Green")
-	#set($backgroundColor = "#4CAF50")
+	#set($backgroundColor = "background-color:#4CAF50")
 #end
 #if($paramBgColor == "Light Green")
-	#set($backgroundColor = "#8bc34a")
+	#set($backgroundColor = "background-color:#8bc34a")
 #end
 #if($paramBgColor == "Lime")
-	#set($backgroundColor = "#cddc39")
+	#set($backgroundColor = "background-color:#cddc39")
 #end
 #if($paramBgColor == "Sand")
-	#set($backgroundColor = "#fdf5e6")
+	#set($backgroundColor = "background-color:#fdf5e6")
 #end
 #if($paramBgColor == "Khaki")
-	#set($backgroundColor = "#f0e68c")
+	#set($backgroundColor = "background-color:#f0e68c")
 #end
 #if($paramBgColor == "Yellow")
-	#set($backgroundColor = "#ffeb3b")
+	#set($backgroundColor = "background-color:#ffeb3b")
 #end
 #if($paramBgColor == "Amber")
-	#set($backgroundColor = "#ffc107")
+	#set($backgroundColor = "background-color:#ffc107")
 #end
 #if($paramBgColor == "Orange")
-	#set($backgroundColor = "#ff9800")
+	#set($backgroundColor = "background-color:#ff9800")
 #end
 #if($paramBgColor == "Deep Orange")
-	#set($backgroundColor = "#ff5722")
+	#set($backgroundColor = "background-color:#ff5722")
 #end
 #if($paramBgColor == "Blue Gray")
-	#set($backgroundColor = "#607d8b")
+	#set($backgroundColor = "background-color:#607d8b")
 #end
 #if($paramBgColor == "Brown")
-	#set($backgroundColor = "#795548")
+	#set($backgroundColor = "background-color:#795548")
 #end
 #if($paramBgColor == "Light Gray")
-	#set($backgroundColor = "#f1f1f1")
+	#set($backgroundColor = "background-color:#f1f1f1")
 #end
 #if($paramBgColor == "Gray")
-	#set($backgroundColor = "#9e9e9e")
+	#set($backgroundColor = "background-color:#9e9e9e")
 #end
 #if($paramBgColor == "Dark Gray")
-	#set($backgroundColor = "#616161")
+	#set($backgroundColor = "background-color:#616161")
 #end
 #if($paramBgColor == "Pale Red")
-	#set($backgroundColor = "#ffdddd")
+	#set($backgroundColor = "background-color:#ffdddd")
 #end
 #if($paramBgColor == "Pale Yellow")
-	#set($backgroundColor = "#ffffcc")
+	#set($backgroundColor = "background-color:#ffffcc")
 #end
 #if($paramBgColor == "Pale Green")
-	#set($backgroundColor = "#ddffdd")
+	#set($backgroundColor = "background-color:#ddffdd")
 #end
 #if($paramBgColor == "Pale Blue")
-	#set($backgroundColor = "#ddffff")
+	#set($backgroundColor = "background-color:#ddffff")
 #end
 
 #if($paramFontColor == "Black")
@@ -246,18 +250,26 @@
 
 
 
-#if($paramIsShadow == true)
-<div 
-	class="agmaplabel" 
-	id="agmaplabel::${currentTime}" 
-	style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);position:absolute;color:${fontColor};z-index:${paramLayer};left:${paramLeft}px;top:${paramTop}px;width:${paramWidth}px;opacity:${opacity};display:block;background-color:${backgroundColor};">
-	$body
-</div>
+
+#set($style1 = "position:absolute;color:${fontColor};z-index:${paramLayer};left:${paramLeft}px;top:${paramTop}px;display:block;${opacity};${backgroundColor};")
+
+#if(!$paramWidth)
+	#set($style2 = "")
 #else
+	#set($style2 = "width:${paramWidth}px;")
+#end
+
+
+#if($paramIsShadow == true)
+	#set($style3 = "box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);")
+#else
+	#set($style3 = "")
+#end
+
+
 <div 
 	class="agmaplabel" 
 	id="agmaplabel::${currentTime}" 
-	style="position:absolute;color:${fontColor};z-index:${paramLayer};left:${paramLeft}px;top:${paramTop}px;width:${paramWidth}px;opacity:${opacity};display:block;background-color:${backgroundColor};">
+	style="${style1}${style2}${style3}">
 	$body
 </div>
-#end
