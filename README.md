@@ -25,3 +25,4 @@ Most interesting macros:
 
 - (folder mark) Mark macro: simple macro to add multiple color, font, size, background to Confluence content
 
+- (folder map) Advanced Map macros (2 macros): it allows you to display layers over an image. These layer can bring Confluence content.
